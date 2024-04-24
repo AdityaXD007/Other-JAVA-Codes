@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+class Restaurant {
+    protected double subtotal;
+    private static final double SERVICE_CHARGE_RATE = 0.1;
+    private static final double VAT_RATE = 0.05;
+
+    public Restaurant() {
+        this.subtotal = 0;
+    }
+
+    public void inputSubtotal() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter subtotal amount: ");
+        subtotal = scanner.nextDouble();
+    }
+
+    public double calculateTotalAmount() {
+        double totalAmount = subtotal + (subtotal * SERVICE_CHARGE_RATE) + (subtotal * VAT_RATE);
+        return totalAmount;
+        
+    }
+}
+
+class MyRestro extends Restaurant {
+    
+    public void inputSubtotal() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter subtotal amount: ");
+        subtotal = scanner.nextDouble();
+    }
+    
+    public double calculateTotalAmount() {
+        return subtotal;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Restaurant restaurant = new Restaurant();
+        restaurant.inputSubtotal();
+        System.out.printf("Total amount (including service charge and VAT): $%.2f%n", restaurant.calculateTotalAmount());
+
+        MyRestro myRestro = new MyRestro();
+        myRestro.inputSubtotal();
+        System.out.printf("Total amount (excluding service charge and VAT): $%.2f%n", myRestro.calculateTotalAmount());
+    }
+}
